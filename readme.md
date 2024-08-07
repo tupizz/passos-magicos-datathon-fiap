@@ -1,3 +1,8 @@
+## FIAP - Datathon
+
+- Student: Tadeu H. T. Junior
+- Course: Pos-Tech in Artificial Intelligence & Data Engineering
+
 ### Introduction
 
 The Passos Mágicos Association has a 31-year history of working to transform the lives of low-income children and young people, helping them access better life opportunities.
