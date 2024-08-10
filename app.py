@@ -1,14 +1,18 @@
 import streamlit as st
 import warnings
-
 import locale
 
-warnings.filterwarnings("ignore")
+home_page = st.Page("pages/home.py", title="Home", icon=":material/home:")
+create_page = st.Page("pages/analytical.py", title="Analytical", icon=":material/insights:")
+delete_page = st.Page("pages/model.py", title="Model prediction", icon="✨")
+
+pg = st.navigation([home_page, create_page, delete_page])
+st.set_page_config(layout="wide", page_title="Tech Challenge 5 | FIAP", page_icon=":material/edit:")
+pg.run()
+
+
 warnings.filterwarnings("ignore")
 locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
-st.set_page_config(
-    page_title="Tech Challenge 5 | FIAP", layout="wide"
-)
 
 # Sidebar definitions
 with st.sidebar:
@@ -44,6 +48,3 @@ with st.sidebar:
         disabled=False,
         use_container_width=False,
     )
-
-st.title('Hello, Streamlit!')
-st.write('Welcome to your first Streamlit app.')
