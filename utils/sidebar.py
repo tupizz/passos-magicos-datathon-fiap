@@ -9,20 +9,21 @@ def show_sidebar():
         _, col0, _ = st.columns([1, 8, 1])
 
         with col0:
-            st.image("assets/imgs/logo-fiap.png", width=150, use_column_width=True)
-
-        st.divider()
-
-        st.subheader("About the project")
-        st.write(
-            "Este projeto foi desenvolvido para o Tech Challenge 5 da FIAP, utilizando Streamlit para a criação de uma aplicação web interativa."
-        )
+            st.image("assets/imgs/logo-fiap.png", use_column_width=True)
 
         st.divider()
 
         st.subheader(":blue[Aluno]")
         st.text(
             "Tadeu H. dos Reis Tupinambá Jr."
+        )
+        st.text("Matrícula: RM351125")
+
+        st.divider()
+
+        st.subheader("About the project")
+        st.write(
+            "Este projeto foi desenvolvido para o Tech Challenge 5 da FIAP, utilizando Streamlit para a criação de uma aplicação web interativa."
         )
 
         st.divider()
