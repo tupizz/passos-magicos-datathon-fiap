@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.graph_objs as go
 from utils.charts import (
     format_number,
     plot_boxplot,
@@ -57,9 +58,6 @@ with st.container():
     st.markdown("""
         Similar to the previous year, the majority of the children and youth served by the NGO in 2021 come from public schools.
         """)
-
-    # Descriptive analysis of student ages
-    st.subheader("Descriptive Analysis of Age", divider="blue")
 
     # Handle missing values in age
     df_2020["IDADE_ALUNO"] = pd.to_numeric(df_2020["IDADE_ALUNO"], errors="coerce")
@@ -132,3 +130,6 @@ with st.container():
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("The boxplot visually represents key statistics discussed earlier, further validating the observed trends.")
+
+
+

@@ -13,16 +13,16 @@ def show_sidebar():
 
         st.divider()
 
-        st.subheader(":blue[Aluno]")
-        st.text(
-            "Tadeu H. dos Reis Tupinambá Jr."
+        st.subheader("About the project")
+        st.write(
+            "Este projeto foi desenvolvido para o Tech Challenge 5 da FIAP, utilizando Streamlit para a criação de uma aplicação web interativa."
         )
 
         st.divider()
 
-        st.subheader("About the project")
-        st.write(
-            "Este projeto foi desenvolvido para o Tech Challenge 5 da FIAP, utilizando Streamlit para a criação de uma aplicação web interativa."
+        st.subheader(":blue[Aluno]")
+        st.text(
+            "Tadeu H. dos Reis Tupinambá Jr."
         )
 
         st.divider()
