@@ -7,9 +7,8 @@ import plotly.express as px
 from typing import List
 import locale
 
-
 def format_number(number, format="%0.0f"):
-    return locale.format(format, number, grouping=True)
+    return locale.format_string(format, number, grouping=True)
 
 
 def classificar_distribuicao_histograma(data):
