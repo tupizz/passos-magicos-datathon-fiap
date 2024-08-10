@@ -2,7 +2,7 @@
 
 - Student: Tadeu H. T. Junior
 - Course: Pos-Tech in Artificial Intelligence & Data Engineering
-- Stremlit app: https://tvbdudbb9mybwyg56mmwd6.streamlit.app/
+- Stremlit app: https://fiap-datathon-5-tadeu.streamlit.app/
 
 ### Introduction
 

@@ -1,5 +1,40 @@
 import streamlit as st
 
+# Custom CSS to style the table
+st.markdown(
+    """
+    <style>
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+    .custom-table th, .custom-table td {
+        padding: 12px 15px;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+    }
+    .custom-table th {
+        background-color: #fafafa; /* Soft light grey */
+        color: #333333; /* Dark grey for contrast */
+        font-weight: bold;
+    }
+    .custom-table tr:nth-child(even) {
+        background-color: rgba(255,255,255,0.2); /* Very light grey for alternating rows */
+    }
+    .custom-table tr:hover {
+        background-color: rgba(255,255,255,0.8); /* Slightly darker grey for hover effect */
+        color: #333333; /* Dark grey for text on hover */
+        transition: 0.3s; /* Smooth transition on hover */
+        cursor: pointer; /* Cursor on hover */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Container to manage the layout of the page
 with st.container():
     # Creating two columns, with a 7:3 ratio
@@ -43,61 +78,219 @@ with st.container():
         unsafe_allow_html=True,
     )
 
-    # Detailed data dictionary explaining each column in the dataset
+    # Creating the styled table using HTML
     st.markdown(
         f"""
-            | Column | Description |
-            |:----------------:|:-------------:|
-            | INSTITUICAO_ENSINO_ALUNO_2020 | Shows the student's educational institution in 2020 |
-            | NOME | Student's name (data is anonymized) |
-            | IDADE_ALUNO_2020 | Student's age in 2020 |
-            | PEDRA_2020 | Student's classification based on the INDE number (2020), the classification concept is given by: Quartz – 2.405 to 5.506 / Agate – 5.506 to 6.868 / Amethyst – 6.868 to 8.230 / Topaz – 8.230 to 9.294 |
-            | IAA_2020 | Self-Assessment Indicator – Average of the student's self-assessment scores in 2020 |
-            | IEG_2020 | Engagement Indicator – Average of the student's engagement scores in 2020 |
-            | IPS_2020 | Psychosocial Indicator – Average of the student's psychosocial scores in 2020 |
-            | IDA_2020 | Learning Indicator – Average of the student's learning indicator scores in 2020 |
-            | IPP_2020 | Psychopedagogical Indicator – Average of the student's psychopedagogical scores in 2020 |
-            | IPV_2020 | Turning Point Indicator – Average of the student's turning point scores in 2020 |
-            | IAN_2020 | Level Adequacy Indicator – Average of the student's adequacy scores to the current level in 2020 |
-            | INDE_2020 | Educational Development Index – Overall student evaluation process metric, given by the weighting of the indicators: IAN, IDA, IEG, IAA, IPS, IPP, and IPV in 2020. |
-            | DESTAQUE_IEG_2020 | Evaluators' observations about the student regarding the "Engagement Indicator" in 2020 |
-            | DESTAQUE_IDA_2020 | Evaluators' observations about the student regarding the "Learning Indicator" in 2020 |
-            | DESTAQUE_IPV_2020 | Evaluators' observations about the student regarding the "Turning Point Indicator" in 2020 |
-            | PONTO_VIRADA_2020 | Boolean field indicating whether the student reached the "Turning Point" in 2020 |
-            | PEDRA_2021 | Student's classification based on the INDE number (2021), the classification concept is given by: Quartz – 2.405 to 5.506 / Agate – 5.506 to 6.868 / Amethyst – 6.868 to 8.230 / Topaz – 8.230 to 9.294 |
-            | IAA_2021 | Self-Assessment Indicator – Average of the student's self-assessment scores in 2021 |
-            | IEG_2021 | Engagement Indicator – Average of the student's engagement scores in 2021 |
-            | IPS_2021 | Psychosocial Indicator – Average of the student's psychosocial scores in 2021 |
-            | IDA_2021 | Learning Indicator – Average of the student's learning indicator scores in 2021 |
-            | IPP_2021 | Psychopedagogical Indicator – Average of the student's psychopedagogical scores in 2021 |
-            | IPV_2021 | Turning Point Indicator – Average of the student's turning point scores in 2021 |
-            | IAN_2021 | Level Adequacy Indicator – Average of the student's adequacy scores to the current level in 2021 |
-            | INDE_2021 | Educational Development Index – Overall student evaluation process metric, given by the weighting of the indicators: IAN, IDA, IEG, IAA, IPS, IPP, and IPV in 2021. |
-            | REC_EQUIPE_1_2021 | Recommendation from the Evaluation Team: 1 in 2021 |
-            | REC_EQUIPE_2_2021 | Recommendation from the Evaluation Team: 2 in 2021 |
-            | REC_EQUIPE_3_2021 | Recommendation from the Evaluation Team: 3 in 2021 |
-            | REC_EQUIPE_4_2021 | Recommendation from the Evaluation Team: 4 in 2021 |
-            | REC_PSICO_2021 | Shows the recommendation from the psychology team about the student in 2021 |
-            | PONTO_VIRADA_2021 | Boolean field indicating whether the student reached the "Turning Point" in 2021 |
-            | PEDRA_2022 | Student's classification based on the INDE number (2022), the classification concept is given by: Quartz – 2.405 to 5.506 / Agate – 5.506 to 6.868 / Amethyst – 6.868 to 8.230 / Topaz – 8.230 to 9.294 |
-            | IAA_2022 | Self-Assessment Indicator – Average of the student's self-assessment scores in 2022 |
-            | IEG_2022 | Engagement Indicator – Average of the student's engagement scores in 2022 |
-            | IPS_2022 | Psychosocial Indicator – Average of the student's psychosocial scores in 2022 |
-            | IDA_2022 | Learning Indicator – Average of the student's learning indicator scores in 2022 |
-            | IPP_2022 | Psychopedagogical Indicator – Average of the student's psychopedagogical scores in 2022 |
-            | IPV_2022 | Turning Point Indicator – Average of the student's turning point scores in 2022 |
-            | IAN_2022 | Level Adequacy Indicator – Average of the student's adequacy scores to the current level in 2022 |
-            | INDE_2022 | Educational Development Index – Overall student evaluation process metric, given by the weighting of the indicators: IAN, IDA, IEG, IAA, IPS, IPP, and IPV in 2022. |
-            | REC_PSICO_2022 | Shows the recommendation from the psychology team about the student in 2022 |
-            | REC_AVA_1_2022 | Recommendation from the Evaluation Team 1 in 2022 |
-            | REC_AVAL_2_2022 | Recommendation from the Evaluation Team: 2 in 2022 |
-            | REC_AVAL_3_2022 | Recommendation from the Evaluation Team: 3 in 2022 |
-            | REC_AVAL_4_2022 | Recommendation from the Evaluation Team: 4 in 2022 |
-            | DESTAQUE_IEG_2022 | Observations from the teachers about the student regarding the "Engagement Indicator" in 2022 |
-            | DESTAQUE_IDA_2022 | Observations from the teachers about the student regarding the "Learning Indicator" in 2022 |
-            | DESTAQUE_IPV_2022 | Observations from the teachers about the student regarding the "Turning Point Indicator" in 2022 |
-            | PONTO_VIRADA_2022 | Boolean field indicating whether the student reached the "Turning Point" in 2022 |
-            | INDICADO_BOLSA_2022 | Boolean field indicating whether the student was recommended for a scholarship in 2022 |
-            """,
-        unsafe_allow_html=True,
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Column</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INSTITUICAO_ENSINO_ALUNO_2020</td>
+                    <td>Shows the student's educational institution in 2020</td>
+                </tr>
+                <tr>
+                    <td>NOME</td>
+                    <td>Student's name (data is anonymized)</td>
+                </tr>
+                <tr>
+                    <td>IDADE_ALUNO_2020</td>
+                    <td>Student's age in 2020</td>
+                </tr>
+                <tr>
+                    <td>PEDRA_2020</td>
+                    <td>Student's classification based on the INDE number (2020), the classification concept is given by: Quartz – 2.405 to 5.506 / Agate – 5.506 to 6.868 / Amethyst – 6.868 to 8.230 / Topaz – 8.230 to 9.294</td>
+                </tr>
+                <tr>
+                    <td>IAA_2020</td>
+                    <td>Self-Assessment Indicator – Average of the student's self-assessment scores in 2020</td>
+                </tr>
+                <tr>
+                    <td>IEG_2020</td>
+                    <td>Engagement Indicator – Average of the student's engagement scores in 2020</td>
+                </tr>
+                <tr>
+                    <td>IPS_2020</td>
+                    <td>Psychosocial Indicator – Average of the student's psychosocial scores in 2020</td>
+                </tr>
+                <tr>
+                    <td>IDA_2020</td>
+                    <td>Learning Indicator – Average of the student's learning indicator scores in 2020</td>
+                </tr>
+                <tr>
+                    <td>IPP_2020</td>
+                    <td>Psychopedagogical Indicator – Average of the student's psychopedagogical scores in 2020</td>
+                </tr>
+                <tr>
+                    <td>IPV_2020</td>
+                    <td>Turning Point Indicator – Average of the student's turning point scores in 2020</td>
+                </tr>
+                <tr>
+                    <td>IAN_2020</td>
+                    <td>Level Adequacy Indicator – Average of the student's adequacy scores to the current level in 2020</td>
+                </tr>
+                <tr>
+                    <td>INDE_2020</td>
+                    <td>Educational Development Index – Overall student evaluation process metric, given by the weighting of the indicators: IAN, IDA, IEG, IAA, IPS, IPP, and IPV in 2020.</td>
+                </tr>
+                <tr>
+                    <td>DESTAQUE_IEG_2020</td>
+                    <td>Evaluators' observations about the student regarding the "Engagement Indicator" in 2020</td>
+                </tr>
+                <tr>
+                    <td>DESTAQUE_IDA_2020</td>
+                    <td>Evaluators' observations about the student regarding the "Learning Indicator" in 2020</td>
+                </tr>
+                <tr>
+                    <td>DESTAQUE_IPV_2020</td>
+                    <td>Evaluators' observations about the student regarding the "Turning Point Indicator" in 2020</td>
+                </tr>
+                <tr>
+                    <td>PONTO_VIRADA_2020</td>
+                    <td>Boolean field indicating whether the student reached the "Turning Point" in 2020</td>
+                </tr>
+                <tr>
+                    <td>PEDRA_2021</td>
+                    <td>Student's classification based on the INDE number (2021), the classification concept is given by: Quartz – 2.405 to 5.506 / Agate – 5.506 to 6.868 / Amethyst – 6.868 to 8.230 / Topaz – 8.230 to 9.294</td>
+                </tr>
+                <tr>
+                    <td>IAA_2021</td>
+                    <td>Self-Assessment Indicator – Average of the student's self-assessment scores in 2021</td>
+                </tr>
+                <tr>
+                    <td>IEG_2021</td>
+                    <td>Engagement Indicator – Average of the student's engagement scores in 2021</td>
+                </tr>
+                <tr>
+                    <td>IPS_2021</td>
+                    <td>Psychosocial Indicator – Average of the student's psychosocial scores in 2021</td>
+                </tr>
+                <tr>
+                    <td>IDA_2021</td>
+                    <td>Learning Indicator – Average of the student's learning indicator scores in 2021</td>
+                </tr>
+                <tr>
+                    <td>IPP_2021</td>
+                    <td>Psychopedagogical Indicator – Average of the student's psychopedagogical scores in 2021</td>
+                </tr>
+                <tr>
+                    <td>IPV_2021</td>
+                    <td>Turning Point Indicator – Average of the student's turning point scores in 2021</td>
+                </tr>
+                <tr>
+                    <td>IAN_2021</td>
+                    <td>Level Adequacy Indicator – Average of the student's adequacy scores to the current level in 2021</td>
+                </tr>
+                <tr>
+                    <td>INDE_2021</td>
+                    <td>Educational Development Index – Overall student evaluation process metric, given by the weighting of the indicators: IAN, IDA, IEG, IAA, IPS, IPP, and IPV in 2021.</td>
+                </tr>
+                <tr>
+                    <td>REC_EQUIPE_1_2021</td>
+                    <td>Recommendation from the Evaluation Team: 1 in 2021</td>
+                </tr>
+                <tr>
+                    <td>REC_EQUIPE_2_2021</td>
+                    <td>Recommendation from the Evaluation Team: 2 in 2021</td>
+                </tr>
+                <tr>
+                    <td>REC_EQUIPE_3_2021</td>
+                    <td>Recommendation from the Evaluation Team: 3 in 2021</td>
+                </tr>
+                <tr>
+                    <td>REC_EQUIPE_4_2021</td>
+                    <td>Recommendation from the Evaluation Team: 4 in 2021</td>
+                </tr>
+                <tr>
+                    <td>REC_PSICO_2021</td>
+                    <td>Shows the recommendation from the psychology team about the student in 2021</td>
+                </tr>
+                <tr>
+                    <td>PONTO_VIRADA_2021</td>
+                    <td>Boolean field indicating whether the student reached the "Turning Point" in 2021</td>
+                </tr>
+                <tr>
+                    <td>PEDRA_2022</td>
+                    <td>Student's classification based on the INDE number (2022), the classification concept is given by: Quartz – 2.405 to 5.506 / Agate – 5.506 to 6.868 / Amethyst – 6.868 to 8.230 / Topaz – 8.230 to 9.294</td>
+                </tr>
+                <tr>
+                    <td>IAA_2022</td>
+                    <td>Self-Assessment Indicator – Average of the student's self-assessment scores in 2022</td>
+                </tr>
+                <tr>
+                    <td>IEG_2022</td>
+                    <td>Engagement Indicator – Average of the student's engagement scores in 2022</td>
+                </tr>
+                <tr>
+                    <td>IPS_2022</td>
+                    <td>Psychosocial Indicator – Average of the student's psychosocial scores in 2022</td>
+                </tr>
+                <tr>
+                    <td>IDA_2022</td>
+                    <td>Learning Indicator – Average of the student's learning indicator scores in 2022</td>
+                </tr>
+                <tr>
+                    <td>IPP_2022</td>
+                    <td>Psychopedagogical Indicator – Average of the student's psychopedagogical scores in 2022</td>
+                </tr>
+                <tr>
+                    <td>IPV_2022</td>
+                    <td>Turning Point Indicator – Average of the student's turning point scores in 2022</td>
+                </tr>
+                <tr>
+                    <td>IAN_2022</td>
+                    <td>Level Adequacy Indicator – Average of the student's adequacy scores to the current level in 2022</td>
+                </tr>
+                <tr>
+                    <td>INDE_2022</td>
+                    <td>Educational Development Index – Overall student evaluation process metric, given by the weighting of the indicators: IAN, IDA, IEG, IAA, IPS, IPP, and IPV in 2022.</td>
+                </tr>
+                <tr>
+                    <td>REC_PSICO_2022</td>
+                    <td>Shows the recommendation from the psychology team about the student in 2022</td>
+                </tr>
+                <tr>
+                    <td>REC_AVA_1_2022</td>
+                    <td>Recommendation from the Evaluation Team 1 in 2022</td>
+                </tr>
+                <tr>
+                    <td>REC_AVAL_2_2022</td>
+                    <td>Recommendation from the Evaluation Team: 2 in 2022</td>
+                </tr>
+                <tr>
+                    <td>REC_AVAL_3_2022</td>
+                    <td>Recommendation from the Evaluation Team: 3 in 2022</td>
+                </tr>
+                <tr>
+                    <td>REC_AVAL_4_2022</td>
+                    <td>Recommendation from the Evaluation Team: 4 in 2022</td>
+                </tr>
+                <tr>
+                    <td>DESTAQUE_IEG_2022</td>
+                    <td>Observations from the teachers about the student regarding the "Engagement Indicator" in 2022</td>
+                </tr>
+                <tr>
+                    <td>DESTAQUE_IDA_2022</td>
+                    <td>Observations from the teachers about the student regarding the "Learning Indicator" in 2022</td>
+                </tr>
+                <tr>
+                    <td>DESTAQUE_IPV_2022</td>
+                    <td>Observations from the teachers about the student regarding the "Turning Point Indicator" in 2022</td>
+                </tr>
+                <tr>
+                    <td>PONTO_VIRADA_2022</td>
+                    <td>Boolean field indicating whether the student reached the "Turning Point" in 2022</td>
+                </tr>
+                <tr>
+                    <td>INDICADO_BOLSA_2022</td>
+                    <td>Boolean field indicating whether the student was recommended for a scholarship in 2022</td>
+                </tr>
+            </tbody>
+        </table>
+        """,
+        unsafe_allow_html=True
     )
