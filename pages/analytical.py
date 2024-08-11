@@ -62,42 +62,6 @@ with st.container():
     # Handle missing values in age
     df_2020["IDADE_ALUNO"] = pd.to_numeric(df_2020["IDADE_ALUNO"], errors="coerce")
 
-    # Create age groups
-    bins = [7, 10, 15, 21]
-    labels = ["7-9", "10-14", "15+"]
-    df_2020["FAIXA"] = pd.cut(df_2020["IDADE_ALUNO"], bins=bins, labels=labels, right=False)
-
-    # Descriptive statistics for age
-    col = "IDADE_ALUNO"
-    df_descriptive = df_2020[col].describe().to_frame()
-    df_descriptive.reset_index(inplace=True)
-    df_descriptive.columns = ["Measure", "Age"]
-
-    # Formatting descriptive stats for display
-    measure_count = format_number(df_descriptive.loc[df_descriptive['Measure'] == 'count', 'Age'].values[0])
-    measure_mean = format_number(df_descriptive.loc[df_descriptive['Measure'] == 'mean', 'Age'].values[0], "%0.2f")
-    measure_std = format_number(df_descriptive.loc[df_descriptive['Measure'] == 'std', 'Age'].values[0])
-    measure_min = format_number(df_descriptive.loc[df_descriptive['Measure'] == 'min', 'Age'].values[0])
-    measure_25 = format_number(df_descriptive.loc[df_descriptive['Measure'] == '25%', 'Age'].values[0])
-    measure_50 = format_number(df_descriptive.loc[df_descriptive['Measure'] == '50%', 'Age'].values[0])
-    measure_75 = format_number(df_descriptive.loc[df_descriptive['Measure'] == '75%', 'Age'].values[0])
-    measure_max = format_number(df_descriptive.loc[df_descriptive['Measure'] == 'max', 'Age'].values[0])
-
-    st.markdown(f"""
-    The table below provides a statistical overview of student ages for the year **2020**.
-    With a total of **{measure_count}** observations, the average age is approximately **{measure_mean}** years, 
-    with a standard deviation of **{measure_std}** years. The minimum recorded age is **{measure_min}** years, 
-    and the maximum is **{measure_max}** years. Additionally, 25% of students are up to **{measure_25}** years old, 
-    the median age is **{measure_50}** years, and 75% of students are up to **{measure_75}** years old.
-    """)
-
-    # Display the descriptive statistics table
-    with st.container():
-        _, col, _ = st.columns([3, 4, 3])
-        with col:
-            st.divider()
-            st.dataframe(df_descriptive, use_container_width=True, hide_index=True)
-
     # Age distribution analysis
     st.subheader("Age Distribution", divider="blue")
     st.markdown("The following sections analyze the distribution of student ages for insightful patterns.")
