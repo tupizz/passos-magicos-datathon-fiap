@@ -130,7 +130,8 @@ with st.container():
     )
 
     with st.container():
-        col0, col1, col2, col3 = st.columns(4)
+        col0, col1, col2, col3, col4, col5, col6, col7 = st.columns(8)
+
 
         with col0:
             indicator_inde = st.number_input(
@@ -176,10 +177,7 @@ with st.container():
                 format="%.2f",
             )
 
-    with st.container():
-        col0, col1, col2, col3 = st.columns(4)
-
-        with col0:
+        with col4:
             indicator_iaa = st.number_input(
                 label="**:blue[IAA]**",
                 key="iaa",
@@ -190,7 +188,7 @@ with st.container():
                 format="%.2f",
             )
 
-        with col1:
+        with col5:
             indicator_ips = st.number_input(
                 label="**:blue[IPS]**",
                 key="ips",
@@ -201,7 +199,7 @@ with st.container():
                 format="%.2f",
             )
 
-        with col2:
+        with col6:
             indicator_ipp = st.number_input(
                 label="**:blue[IPP]**",
                 key="ipp",
@@ -212,7 +210,7 @@ with st.container():
                 format="%.2f",
             )
 
-        with col3:
+        with col7:
             indicator_ipv = st.number_input(
                 label="**:blue[IPV]**",
                 key="ipv",

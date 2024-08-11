@@ -125,11 +125,4 @@ with st.container():
 
     st.markdown("The histogram above provides a clearer view of the percentage distribution of students by age, reaffirming that the 10-14 age group is the most represented.")
 
-    # Plot boxplot for age
-    fig = plot_boxplot(df_2020, "IDADE_ALUNO", "Boxplot of Student Ages")
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("The boxplot visually represents key statistics discussed earlier, further validating the observed trends.")
-
-
 
