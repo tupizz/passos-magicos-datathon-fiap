@@ -29,8 +29,22 @@ with st.container():
     st.markdown(
         f"""
         The scholarship recommendation model developed for the NGO **:blue[Passos Mágicos]** was evaluated based on performance metrics, including loss and accuracy. The performance data shows that the model is generalizing well to unseen data, indicating that it does not suffer from *overfitting*.
-""",
+        """,
         unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+        The performance indicators used in the model are as follows:
+        - **INDE**: Student's average grade in the last semester.
+        - **IAN**: Number of classes attended by the student.
+        - **IDA**: Student's average grade in the last year.
+        - **IEG**: Number of classes the student participated in.
+        - **IAA**: Number of classes the student passed.
+        - **IPS**: Number of classes attended by the student.
+        - **IPP**: Number of classes the student participated in.
+        - **IPV**: Number of classes the student passed.
+        """
     )
 
     with st.container():

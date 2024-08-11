@@ -1,6 +1,9 @@
 import joblib
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.graph_objs as go
+
 
 # Setting the title of the Streamlit app
 st.title('Next Grade Prediction Model')
@@ -9,6 +12,9 @@ st.title('Next Grade Prediction Model')
 with st.container():
     model_path = "model/random_forest_ponto_virada_model.pkl"
     scaler_path = "model/random_forest_ponto_virada_scaler.pkl"
+    feature_importance_df = pd.read_csv(
+        "output/ponto_virada_feature_importance.csv", sep=","
+    )
 
     # Load the model and scaler using joblib
     model = joblib.load(model_path)
@@ -32,24 +38,75 @@ with st.container():
         The indicators used in the model are normalized using a scaler to ensure the model predictions are accurate."""
     )
 
+    st.markdown(
+        """
+        Reasons why I have chosen the Random Forest model:
+        - **Interpretability**: Random Forest models are easy to interpret and understand.
+        - **Feature Importance**: Random Forest models provide feature importance, which helps in understanding the impact of each feature on the prediction.
+        - **Robustness**: Random Forest models are robust to overfitting and noise in the data.
+        - **Non-linear relationships**: Random Forest models can capture non-linear relationships between features and the target variable.
+        - **Handles Missing Data and Imbalanced Datasets**: Random Forest models can handle missing data and imbalanced datasets effectively. It can be tuned with class weights or combined with techniques like SMOTE to handle imbalanced classes 
+        """
+    )
+
+    st.markdown(
+        """
+        The performance indicators used in the model are as follows:
+        - **IAN**: Student's average grade in the last semester.
+        - **IPV**: Number of classes attended by the student.
+        - **IAA**: Student's average grade in the last year.
+        - **IPS**: Number of classes the student participated in.
+        - **IPP**: Number of classes the student passed.
+        """
+    )
+
+    st.markdown(
+        """
+        The feature importance plot below shows the importance of each feature in the model. The higher the value, the more important the feature is in predicting the student's grade advancement.
+        """
+    )
+
+    with st.container():
+
+        # Plot using Plotly
+        fig = go.Figure()
+
+        fig.add_trace(
+            go.Bar(
+                x=feature_importance_df['Importance'],
+                y=feature_importance_df['Feature'],
+                orientation='h',
+                marker=dict(color="blue"),
+                name="Feature Importance",
+            )
+        )
+
+        fig.update_layout(
+            title="Feature Importance in Random Forest Model",
+            xaxis_title="Importance",
+            yaxis_title="Feature",
+            yaxis=dict(
+                autorange="reversed"  # To invert y-axis like plt.gca().invert_yaxis()
+            ),
+            height=600,
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",
+                y=1.02,
+                xanchor="right",
+                x=1,
+            ),
+        )
+
+        # Display the plot in Streamlit
+        st.plotly_chart(fig)
+
     # Collecting input values for various student performance indicators from the user
     with st.container():
-        col0, col1, col2, col3 = st.columns(4)
-
-        # Collecting input for INDE indicator
-        with col0:
-            indicator_inde = st.number_input(
-                label="**:blue[INDE]**",
-                key="inde",
-                min_value=0.0,
-                max_value=10.0,
-                value=0.0,
-                step=0.1,
-                format="%.2f",
-            )
+        col0, col1, col2, col3, col4 = st.columns(5)
 
         # Collecting input for IAN indicator
-        with col1:
+        with col0:
             indicator_ian = st.number_input(
                 label="**:blue[IAN]**",
                 key="ian",
@@ -60,36 +117,20 @@ with st.container():
                 format="%.2f",
             )
 
-        # Collecting input for IDA indicator
-        with col2:
-            indicator_ida = st.number_input(
-                label="**:blue[IDA]**",
-                key="ida",
+        # Collecting input for IPV indicator
+        with col1:
+            indicator_ipv = st.number_input(
+                label="**:blue[IPV]**",
+                key="ipv",
                 min_value=0.0,
                 max_value=10.0,
                 value=0.0,
                 step=0.1,
                 format="%.2f",
             )
-
-        # Collecting input for IEG indicator
-        with col3:
-            indicator_ieg = st.number_input(
-                label="**:blue[IEG]**",
-                key="ieg",
-                min_value=0.0,
-                max_value=10.0,
-                value=0.0,
-                step=0.1,
-                format="%.2f",
-            )
-
-    # Collecting input for additional performance indicators
-    with st.container():
-        col0, col1, col2, col3 = st.columns(4)
 
         # Collecting input for IAA indicator
-        with col0:
+        with col2:
             indicator_iaa = st.number_input(
                 label="**:blue[IAA]**",
                 key="iaa",
@@ -100,8 +141,9 @@ with st.container():
                 format="%.2f",
             )
 
+
         # Collecting input for IPS indicator
-        with col1:
+        with col3:
             indicator_ips = st.number_input(
                 label="**:blue[IPS]**",
                 key="ips",
@@ -113,7 +155,7 @@ with st.container():
             )
 
         # Collecting input for IPP indicator
-        with col2:
+        with col4:
             indicator_ipp = st.number_input(
                 label="**:blue[IPP]**",
                 key="ipp",
@@ -124,29 +166,16 @@ with st.container():
                 format="%.2f",
             )
 
-        # Collecting input for IPV indicator
-        with col3:
-            indicator_ipv = st.number_input(
-                label="**:blue[IPV]**",
-                key="ipv",
-                min_value=0.0,
-                max_value=10.0,
-                value=0.0,
-                step=0.1,
-                format="%.2f",
-            )
+
 
     # Creating a DataFrame from the input values to feed into the model
     student_data = pd.DataFrame(
         {
             'IAA': indicator_iaa,
-            'IEG': indicator_ieg,
             'IPS': indicator_ips,
-            'IDA': indicator_ida,
             'IPP': indicator_ipp,
             'IPV': indicator_ipv,
             'IAN': indicator_ian,
-            'INDE': indicator_inde
         },
         index=[0],
     )
