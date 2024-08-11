@@ -1,15 +1,10 @@
 import streamlit as st
-import pandas as pd
 import plotly.graph_objs as go
+import pandas as pd
 from utils.charts import (
     format_number,
-    plot_boxplot,
     plot_histograma,
-    plot_boxplot_analise_indicador,
-    plot_boxplot_comparativo,
-    classificar_distribuicao_histograma,
-    plot_bar,
-    plot_histograma_comparativo
+    plot_bar
 )
 
 # Load datasets
@@ -88,5 +83,49 @@ with st.container():
     st.plotly_chart(fig, use_container_width=True)
 
     st.markdown("The histogram above provides a clearer view of the percentage distribution of students by age, reaffirming that the 10-14 age group is the most represented.")
+
+    st.subheader("Categorical Features", divider="blue")
+    cat_cols = df_full.select_dtypes(include=['object']).columns
+    cat_cols = cat_cols[cat_cols != 'NOME']
+    cat_cols = cat_cols[cat_cols != 'FASE_TURMA']
+
+    values_to_exclude = ['NOME']
+
+    for col in cat_cols:
+        # Ensure there's data to plot
+        if not df_full.empty:
+            st.write(f"Count plot of {col}")
+
+            # Create the count plot using Plotly
+            fig = go.Figure()
+            value_counts = df_full[col].value_counts()
+
+            fig.add_trace(go.Bar(
+                x=value_counts.values,
+                y=value_counts.index,
+                text=value_counts.values,
+                orientation='h',  # Horizontal bar chart
+                textposition='auto'
+            ))
+
+            fig.update_traces(marker=dict(line=dict(width=0.5, color='DarkSlateGrey')))
+
+            # Customize layout
+            fig.update_layout(
+                xaxis_title=f'Count of {col}',
+                yaxis_title='Category Value',
+                bargap=0.15,  # Set the gap between bars
+                bargroupgap=0.1,  # Set the gap between groups of bars
+                font=dict(
+                    size=10  # Adjust the fontsize as needed
+                )
+            )
+
+            st.plotly_chart(fig)
+        else:
+            st.write(f"No data available for {col} after filtering.")
+
+
+
 
 
