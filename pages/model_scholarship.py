@@ -28,7 +28,7 @@ with st.container():
 
     st.markdown(
         f"""
-        The scholarship recommendation model developed for the NGO **:blue[Passos Mágicos]** was evaluated based on performance metrics, including loss and accuracy. The performance data shows that the model is generalizing well to unseen data, indicating that it does not suffer from *overfitting*.
+        The scholarship recommendation model developed for the NGO **:green[Passos Mágicos]** was evaluated based on performance metrics, including loss and accuracy. The performance data shows that the model is generalizing well to unseen data, indicating that it does not suffer from *overfitting*.
         """,
         unsafe_allow_html=True,
     )
@@ -59,6 +59,7 @@ with st.container():
                     y=training["accuracy"],
                     mode="lines",
                     name="Traning Accuracy",
+                    marker=dict(color='#90ee90')  # Set the color to light green
                 )
             )
             fig.add_trace(
@@ -96,6 +97,7 @@ with st.container():
                     y=training["loss"],
                     mode="lines",
                     name="Loss of training",
+                    marker=dict(color='#90ee90')  # Set the color to light green
                 )
             )
             fig.add_trace(
@@ -126,7 +128,7 @@ with st.container():
 
 
     st.markdown(
-        """Use the controls below to simulate a student's performance indicators and click **:blue[Predict]** to run the scholarship award model. This model provides **:blue[2]** possible outcomes: recommend that the student **:blue[receive]** a scholarship or **:blue[not receive]** a scholarship."""
+        """Use the controls below to simulate a student's performance indicators and click **:green[Predict]** to run the scholarship award model. This model provides **:green[2]** possible outcomes: recommend that the student **:green[receive]** a scholarship or **:green[not receive]** a scholarship."""
     )
 
     with st.container():
@@ -135,7 +137,7 @@ with st.container():
 
         with col0:
             indicator_inde = st.number_input(
-                label="**:blue[INDE]**",
+                label="**:green[INDE]**",
                 key="inde",
                 min_value=0.0,
                 max_value=10.0,
@@ -146,7 +148,7 @@ with st.container():
 
         with col1:
             indicator_ian = st.number_input(
-                label="**:blue[IAN]**",
+                label="**:green[IAN]**",
                 key="ian",
                 min_value=0.0,
                 max_value=10.0,
@@ -157,7 +159,7 @@ with st.container():
 
         with col2:
             indicator_ida = st.number_input(
-                label="**:blue[IDA]**",
+                label="**:green[IDA]**",
                 key="ida",
                 min_value=0.0,
                 max_value=10.0,
@@ -168,7 +170,7 @@ with st.container():
 
         with col3:
             indicator_ieg = st.number_input(
-                label="**:blue[IEG]**",
+                label="**:green[IEG]**",
                 key="ieg",
                 min_value=0.0,
                 max_value=10.0,
@@ -179,7 +181,7 @@ with st.container():
 
         with col4:
             indicator_iaa = st.number_input(
-                label="**:blue[IAA]**",
+                label="**:green[IAA]**",
                 key="iaa",
                 min_value=0.0,
                 max_value=10.0,
@@ -190,7 +192,7 @@ with st.container():
 
         with col5:
             indicator_ips = st.number_input(
-                label="**:blue[IPS]**",
+                label="**:green[IPS]**",
                 key="ips",
                 min_value=0.0,
                 max_value=10.0,
@@ -201,7 +203,7 @@ with st.container():
 
         with col6:
             indicator_ipp = st.number_input(
-                label="**:blue[IPP]**",
+                label="**:green[IPP]**",
                 key="ipp",
                 min_value=0.0,
                 max_value=10.0,
@@ -212,7 +214,7 @@ with st.container():
 
         with col7:
             indicator_ipv = st.number_input(
-                label="**:blue[IPV]**",
+                label="**:green[IPV]**",
                 key="ipv",
                 min_value=0.0,
                 max_value=10.0,
@@ -237,10 +239,10 @@ with st.container():
 
     if st.button("⚡️ Predict", key="btn_predict_mlp"):
         with st.spinner("Processing..."):
-            st.subheader(":blue[Model Input Matrix]", divider="blue")
+            st.subheader(":green[Model Input Matrix]", divider="green")
             st.dataframe(student_data, hide_index=True)
 
-            st.subheader(":blue[Model Prediction]", divider="blue")
+            st.subheader(":green[Model Prediction]", divider="green")
             student_data_scaled = scaler.transform(student_data)
             prediction = model.predict(student_data_scaled)
 

@@ -1,10 +1,7 @@
-from typing import Tuple
 import pandas as pd
-from scipy.stats import skew, kurtosis, gaussian_kde
+from scipy.stats import gaussian_kde
 import numpy as np
 import plotly.graph_objs as go
-import plotly.express as px
-from typing import List
 import locale
 
 def format_number(number, format="%0.0f"):
@@ -16,7 +13,6 @@ def plot_bar(
     titulo: str,
     xaxis: str,
     yaxis: str = "Quantidade",
-    cores: List[str] = None,
 ):
     grupos = df[col].value_counts()
 
@@ -26,7 +22,7 @@ def plot_bar(
             y=grupos,
             text=grupos,
             textposition="auto",
-            marker_color=cores,
+            marker=dict(color='#90ee90')  # Set the color to light green
         )
     )
 
@@ -46,7 +42,6 @@ def plot_histograma(
     titulo: str,
     bins: int = None,
     rug: bool = True,
-    analise: bool = False,
 ):
     # faz o cálculo do KDE com o scipy
     data = df[col].values
@@ -86,26 +81,8 @@ def plot_histograma(
         texttemplate="%{y:.2%}",
         textposition="outside",
         selector=dict(type="histogram"),
+        marker=dict(color='#90ee90')  # Set the color to light green
     )
-
-    # 5. faz o cálculo da curtose (achatamento), assimétria, e modos da distribuição
-    if analise:
-        classificacao = classificar_distribuicao_histograma(data)
-
-        fig.add_annotation(
-            x=0,
-            y=-0.2,
-            xref="paper",
-            yref="paper",
-            text=f"<b>&nbsp;&nbsp;{classificacao}&nbsp;&nbsp;</b>",
-            showarrow=False,
-            font=dict(color="black", size=12),
-            bgcolor="white",
-            borderwidth=1,
-            bordercolor="black",
-            borderpad=2,
-            height=15,
-        )
 
     # 6. configs
     fig.update_layout(

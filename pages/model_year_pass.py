@@ -76,7 +76,7 @@ with st.container():
                 x=feature_importance_df['Importance'],
                 y=feature_importance_df['Feature'],
                 orientation='h',
-                marker=dict(color="blue"),
+                marker=dict(color='#90ee90'),  # Set the color to light green
                 name="Feature Importance",
             )
         )
@@ -108,7 +108,7 @@ with st.container():
         # Collecting input for IAN indicator
         with col0:
             indicator_ian = st.number_input(
-                label="**:blue[IAN]**",
+                label="**:green[IAN]**",
                 key="ian",
                 min_value=0.0,
                 max_value=10.0,
@@ -120,7 +120,7 @@ with st.container():
         # Collecting input for IPV indicator
         with col1:
             indicator_ipv = st.number_input(
-                label="**:blue[IPV]**",
+                label="**:green[IPV]**",
                 key="ipv",
                 min_value=0.0,
                 max_value=10.0,
@@ -132,7 +132,7 @@ with st.container():
         # Collecting input for IAA indicator
         with col2:
             indicator_iaa = st.number_input(
-                label="**:blue[IAA]**",
+                label="**:green[IAA]**",
                 key="iaa",
                 min_value=0.0,
                 max_value=10.0,
@@ -145,7 +145,7 @@ with st.container():
         # Collecting input for IPS indicator
         with col3:
             indicator_ips = st.number_input(
-                label="**:blue[IPS]**",
+                label="**:green[IPS]**",
                 key="ips",
                 min_value=0.0,
                 max_value=10.0,
@@ -157,7 +157,7 @@ with st.container():
         # Collecting input for IPP indicator
         with col4:
             indicator_ipp = st.number_input(
-                label="**:blue[IPP]**",
+                label="**:green[IPP]**",
                 key="ipp",
                 min_value=0.0,
                 max_value=10.0,
@@ -183,10 +183,10 @@ with st.container():
     # Adding a button to trigger the model prediction
     if st.button("⚡️ Predict", key="btn_predict_mlp"):
         with st.spinner("Processing..."):
-            st.subheader(":blue[Model Input Matrix]", divider="blue")
+            st.subheader(":green[Model Input Matrix]", divider="green")
             st.dataframe(student_data, hide_index=True)
 
-            st.subheader(":blue[Model Prediction]", divider="blue")
+            st.subheader(":green[Model Prediction]", divider="green")
 
             # Scaling the input data using the loaded scaler
             student_data_scaled = scaler.transform(student_data)

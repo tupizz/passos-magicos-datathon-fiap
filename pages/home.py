@@ -13,22 +13,22 @@ st.markdown(
     }
     .custom-table th, .custom-table td {
         padding: 12px 15px;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #90ee90;
         text-align: center;
     }
     .custom-table th {
-        background-color: #fafafa; /* Soft light grey */
+        background-color: #90ee90; /* Soft light grey */
         color: #333333; /* Dark grey for contrast */
         font-weight: bold;
     }
     .custom-table tr:nth-child(even) {
-        background-color: rgba(255,255,255,0.2); /* Very light grey for alternating rows */
+        background-color: rgba(255,255,255,0.1); /* Very light grey for alternating rows */
     }
     .custom-table tr:hover {
-        background-color: rgba(255,255,255,0.8); /* Slightly darker grey for hover effect */
-        color: #333333; /* Dark grey for text on hover */
+        color: rgba(0,255,0, 0.8); /* Dark grey for text on hover */
         transition: 0.3s; /* Smooth transition on hover */
         cursor: pointer; /* Cursor on hover */
+        text-decoration: underline; /* Underline on hover */
     }
     </style>
     """,
@@ -42,7 +42,7 @@ with st.container():
 
     # Adding a header in the first column
     with col0:
-        st.header(f":orange[Passos Mágicos - Datathon FIAP {2024}]")
+        st.header(f":green[Passos Mágicos - Datathon FIAP {2024}]")
 
     # Adding a detailed markdown description about the Passos Mágicos Association
     st.markdown(
@@ -56,11 +56,11 @@ with st.container():
         unsafe_allow_html=True,
     )
 
+    st.subheader(f":green[Main Objective]")
+
     # Explanation of the main objectives of the Datathon
     st.markdown(
         """
-        ### Main Objective
-
         The main objective of the Datathon is for you, as a data scientist, to create a predictive proposal or, as a data analyst, to develop an analytical proposal to demonstrate the impact that the NGO "Passos Mágicos" has been making on the community it serves. The association seeks to empower the use of education as a tool for changing the living conditions of children and young people in social vulnerability. Based on the extensive research dataset on educational development from the period of 2020, 2021, and 2023, you can deliver one of the following proposals:
 
         Analytical Proposal: Create a storytelling to demonstrate the impacts that the NGO "Passos Mágicos" has had on student performance and raise performance indicators. The idea is to create a dashboard and storytelling by telling a story with the data to help Passos Mágicos make the best decisions based on the indicators and to understand the students' profiles.
@@ -71,12 +71,7 @@ with st.container():
     )
 
     # Heading for the Data Dictionary section
-    st.markdown(
-        """
-        ### Data Dictionary
-        """,
-        unsafe_allow_html=True,
-    )
+    st.subheader(f":green[Data Dictionary]")
 
     # Creating the styled table using HTML
     st.markdown(

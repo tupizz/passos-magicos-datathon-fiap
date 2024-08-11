@@ -105,7 +105,8 @@ with st.container():
                 y=value_counts.index,
                 text=value_counts.values,
                 orientation='h',  # Horizontal bar chart
-                textposition='auto'
+                textposition='auto',
+                marker=dict(color='#90ee90')  # Set the color to light green
             ))
 
             fig.update_traces(marker=dict(line=dict(width=0.5, color='DarkSlateGrey')))
